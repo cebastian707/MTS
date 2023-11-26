@@ -5,7 +5,7 @@ const Box = () =>{
 
     return(
         <div id="MachineProgramContainer">
-            <div class="BoxTitle">Turing machine program</div>
+            <div className="BoxTitle">Turing machine program</div>
             <div id="MachineProgramBlock">
                     <div id="MachineProgramBlock2">
                         <div id="SourceContainer">

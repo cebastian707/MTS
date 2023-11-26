@@ -5,7 +5,7 @@ const Control = () =>{
 
     return(
         <div id="MachineControlBlock">
-            <div class="BoxTitle">Controls</div>
+            <div className="BoxTitle">Controls</div>
                 <div id="MachineButtonsBlock">
                     <button id="RunButton" onclick="RunButton();" title="Start the machine running">Run</button>
                 
@@ -75,12 +75,6 @@ const Control = () =>{
                                 <span style={{fontSize:'x-small'}}><a href="javascripit">[Close]</a></span>
                             </div>
                         </div>
-
-
-
-
-                    
-
                 </div>
         </div>
     );

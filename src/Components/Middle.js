@@ -18,7 +18,7 @@ const Middle = () =>{
                 <State/>
                 <Steps/>
             </div>
-            <div class="cleardiv"></div>
+            <div className="cleardiv"></div>
             <div id="MachineLowerSection">
                 <div id="MachineLowerSection2">
                         <Box/>
