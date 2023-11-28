@@ -1,1 +1,1 @@
-This project is a Turing machine that has one and two tape turing machine. It is inspired by https://morphett.info/turing/turing.html#LoadMenu and uses his UI. This code uses react as the frame work as a way to modernize the code. 
+This project is a Turing machine that has one and two tape turing machine. It is inspired by https://morphett.info/turing/turing.html#LoadMenu and uses his UI. This code uses react as the frame work as a way to modernize the code. You can either choose between doing a one tape turing machine or using a two tape turing machine. 
