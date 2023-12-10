@@ -5,15 +5,13 @@ import Steps from "./Steps";
 // import HeadComponent from './Head';
 
 const Machine = () => {
-    // const [tapeString, setTapeString] = useState(initialTapeString);
-    // const [headInput, setHeadInput] = useState(initialHeadInput);
+  
     const [headIdx, setHeadIdx] = useState(0)
     const [runStatus, setRunStatus] = useState(true);
     const [numSteps, setNumSteps] = useState(0);
 
     const [tape, setTape] = useState("");
     const [runButton, setRunButton] = useState(false);
-    // const [pauseButton, setPauseButton] = useState(false);
     const [program, setProgram] = useState("; Load a program from the menu or write your own!")
 
     const [currentState, setCurrentState] = useState('0');
@@ -40,7 +38,6 @@ const Machine = () => {
 
 
     // make reset function here
-    // should reset headIdx to 0 and also pause execution
     const handleResetClick = () => {
         setRunButton(false);
         setHeadIdx(0);
@@ -97,7 +94,7 @@ const Machine = () => {
         }
         return rules
     };
-    // need a reset function, not just for the button but to reset all state variables after a completed run
+
 
 
     useEffect(() => {
@@ -112,8 +109,7 @@ const Machine = () => {
 
             let tmInput = parseTape(tape);
 
-            // idk if this right, shit is almost working
-            // if (tmInput.every(char => char === ' ')) {
+
             if (currentState.includes('halt')){
                 if (currentState.includes('accept')){
                     alert('Machine halted: Accepted.');
@@ -129,39 +125,31 @@ const Machine = () => {
                 }
             }
 
+            // TODO: I think adding a check for empty tape here works as the check for initial tape being empty because it comes after the halt checks.
 
             setNumSteps(numSteps+1);
-            // else{
-            //     alert('Machine halted: The entire tape was read.');
-            //     setRunButton(false); // Halt the machine
 
-            // }
-
-
-            // return; // Exit the function
-            // }
 
 
             const currentChar = (tmInput[headIdx] === ' ') ? '_' : (tmInput[headIdx] || '_');
 
 
             let matchedRule = null;
-            let wildcardMatch = null; // Store a potential wildcard match
-
+            let wildcardMatch = null; 
             for (let rule of rules) {
-                // Check for an exact match
+                // check for an exact match
                 if (rule.currentState === currentState && rule.readSymbol === currentChar) {
                     matchedRule = rule;
-                    break; // Exit the loop as an exact match is found
+                    break; 
                 }
-                // If no exact match, check for a wildcard match
+                // if no exact match, check for a wildcard match
                 else if ((rule.currentState === '*' || rule.currentState === currentState) && 
                          (rule.readSymbol === '*' && wildcardMatch === null)) {
-                    wildcardMatch = rule; // Store the first wildcard match
+                    wildcardMatch = rule; 
                 }
             }
             
-            // Use the wildcard match if no exact match is found
+            // use the wildcard match if no exact match is found
             matchedRule = matchedRule || wildcardMatch;
 
             // NOTE: do something about empty input
@@ -218,8 +206,9 @@ const Machine = () => {
                     <div id="TapeValues">
                         {tape.split("").map((char, idx) => (
                             <span 
-                                key={idx} 
+                                key={idx}
                                 className={idx === headIdx ? "highlighted" : ""}
+                                // id={idx === headIdx ? "MachineHead" : ""}
                             >
                                 {char}
                             </span>
