@@ -11,7 +11,7 @@ const Top = () =>{
                     <ol>
                         
                         <li>
-                            Run a program copy input program into text box.Then click save program after that hit reset. Then finally click the run button
+                            Run a program copy input program into text box.Then click save program after that click reset. Then finally click the run button
                         </li>
                         
                         <li>
