@@ -45,6 +45,7 @@ const Machine = () => {
         setCurrentState("0");
         setNumSteps(0);
         setTape(inputTape);
+        setMessage("Load or write a Turing Machine Program and click Run!");
     }
 
     const parseTape = (string) => {
@@ -125,6 +126,8 @@ const Machine = () => {
                     return;
                     
                 }
+                setMessage("Machine halted.");
+                return;
             }
 
             //  I think adding a check for empty tape here works as the check for initial tape being empty because it comes after the halt checks.
@@ -205,6 +208,7 @@ const Machine = () => {
             } else {
                 setRunButton(false); // Halt the machine
                 setMessage('Machine halted: No matching rule found for current state and character. Input not in language');
+                return;
             }
         };
 
