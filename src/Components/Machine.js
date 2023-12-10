@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Message from "./Message";
 import State from "./State";
 import Steps from "./Steps";
-// import HeadComponent from './Head';
 
 const Machine = () => {
   
@@ -126,7 +125,12 @@ const Machine = () => {
             }
 
             // TODO: I think adding a check for empty tape here works as the check for initial tape being empty because it comes after the halt checks.
-
+            if (tmInput === ["_"] || tmInput == [" "] || tmInput === [""]) {
+                alert('Tape input empty.');
+                setRunButton(false); // Halt the machine
+                return;
+            }
+            
             setNumSteps(numSteps+1);
 
 
@@ -152,7 +156,6 @@ const Machine = () => {
             // use the wildcard match if no exact match is found
             matchedRule = matchedRule || wildcardMatch;
 
-            // NOTE: do something about empty input
 
             console.log(currentState, currentChar);
             console.log(matchedRule);
@@ -194,6 +197,7 @@ const Machine = () => {
 
     return (
         <div>
+            {/* TAPE SECTION */}
             <div className="BoxTitle">Tape</div>
             <div id="MachineTape" className="MachineStatusBox">
                 <div id="RunningTapeDisplay" aria-live="polite">
@@ -217,15 +221,18 @@ const Machine = () => {
                 </div>
             </div>
             
-        
+            {/* CURRENT STATE & STEPS */}
             <div id="MachineMiddleSection">
                 <Message/> 
                 <State state={currentState}/>
                 <Steps steps={numSteps}/>
             </div>
+
+
             <div className="cleardiv"></div>
             <div id="MachineLowerSection">
                 <div id="MachineLowerSection2">
+                    {/* PROGRAM INPUT AREA */}
                     <div id="MachineProgramContainer">
                         <div className="BoxTitle">Turing machine program</div>
                         <div id="MachineProgramBlock">
@@ -244,6 +251,7 @@ const Machine = () => {
                             </div>
                         </div>
                     </div>
+                    {/* CONTROLS */}
                     <div id="MachineControlBlock">
                         <div className="BoxTitle">Controls</div>
                             <div id="MachineButtonsBlock">
@@ -262,7 +270,7 @@ const Machine = () => {
                                     
                                     {/*Need Step Button and go from there */}
                                     <br></br>
-                                    <button id="StepButton"  title="Run the machine for a sing step and then pause">Step</button>
+                                    <button id="StepButton" disabled title="Run the machine for a sing step and then pause">Step</button>
                                     <br></br>    
                             </div>
                     </div>
