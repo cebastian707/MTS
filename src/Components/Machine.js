@@ -115,7 +115,7 @@ const Machine = () => {
             return; // Do nothing if the machine is not running
         }
 
-        
+        // TODO: make sure tape is parsed properly when input is empty,
 
         const step = () => {
             
@@ -151,7 +151,7 @@ const Machine = () => {
 
 
 
-            const currentChar = (tmInput[headIdx] === ' ') ? '_' : (tmInput[headIdx] || '_');
+            const currentChar = (tmInput[headIdx] === ' ' || tmInput[headIdx] === '') ? '_' : (tmInput[headIdx] || '_');
 
 
             let matchedRule = null;
