@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+
+/src/Components/OldShit
+/src/turing.py
+
 # testing
 /coverage
 

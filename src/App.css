@@ -13,6 +13,11 @@
   }
 }
 
+.highlighted {
+  background-color: yellow; /* or any other style to highlight */
+}
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
