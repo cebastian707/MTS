@@ -19,7 +19,7 @@ const Top = () =>{
                         </li>
                         
                         <li>
-                            Click on 'Run' to start the Turing machine and run it until it halts (if ever).
+                            Click on 'Run' to start the Turing machine and run it until it halts (if ever).Click 'Run Full Speed' if you like to run the Touring machine at full speed then click 'Run' to see the machine run.
                             Click on 'Stop' to interrupt the Turing machine while it is running.
                         </li>
                         
