@@ -168,14 +168,14 @@ const Machine = () => {
             if (matchedRule) {
 
                 if (matchedRule.writeSymbol === "_"){
-                    tmInput[headIdx] = " "
+                    tmInput[headIdx] = " ";
                 }
                 else {
                     if (matchedRule.writeSymbol === '*'){
                         ; // do nothing on write symbol wildcard
                     }
                     else{
-                        tmInput[headIdx] = matchedRule.writeSymbol
+                        tmInput[headIdx] = matchedRule.writeSymbol;
                     }
                 }
 
@@ -185,7 +185,16 @@ const Machine = () => {
                 else if (matchedRule.moveDirection === 'l') newHeadIdx -= 1;
 
 
-                // 
+                // TODO: NEED TO DO SOMETHING ABOUT HEAD IDX BEING -1, when it is prepend the tape with a blank space
+                if (newHeadIdx < 0){
+                    // prepend
+                    tmInput.unshift(" ");
+                    newHeadIdx = 0;
+                }
+                else if (newHeadIdx > tmInput.length){
+                    // append
+                    tmInput.push(" ");
+                }
             
 
                 const newState = matchedRule.nextState === '*' ? currentState : matchedRule.nextState;
