@@ -11,20 +11,20 @@ const Top = () =>{
                     <ol>
                         
                         <li>
-                            Run a program copy input program into text box.Then click save program after that click reset. Then finally click the run button
+                            First write a program following the syntax at the bottom into turing machine program area. Then click save program.
                         </li>
                         
                         <li>
-                            Enter something in the 'Input' area - this will be written on the tape initially as input to the machine. Click 'Reset' to initialise the machine.
+                            Next enter something in the Tape 'Input' area - this will be written on the tape initially as input to the machine. Click 'Reset' to initialise the machine.
                         </li>
                         
                         <li>
-                            Click on 'Run' to start the Turing machine and run it until it halts (if ever).Click 'Run Full Speed' if you like to run the Touring machine at full speed then click 'Run' to see the machine run.
-                            Click on 'Stop' to interrupt the Turing machine while it is running.
+                            Finally click on the 'Run' button to start the Turing machine, it will run until it halts (if ever) or if you click on 'Stop' to pause the Turing machine while it is running. Click 'Run Full Speed' if you'd like to run the Turing machine at full speed.
+                            
                         </li>
                         
                         <li>
-                            Click 'Reset' to restore the Turing machine to its initial state so it can be run again.
+                            Remember to click the 'Reset' button to restore the Turing machine to its initial state so it can be run again.
                         </li>
                     </ol>
                 </div>
