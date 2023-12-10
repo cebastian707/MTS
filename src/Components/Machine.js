@@ -14,6 +14,8 @@ const Machine = () => {
     const [runButton, setRunButton] = useState(false);
     const [program, setProgram] = useState("; Load a program from the menu or write your own!")
 
+    const [message, setMessage] = useState("Load or write a Turing Machine Program and click Run!");
+
     const [currentState, setCurrentState] = useState('0');
     const [rules, setRules] = useState([]);
 
@@ -44,6 +46,7 @@ const Machine = () => {
         setCurrentState("0");
         setNumSteps(0);
         setTape(inputTape);
+        setMessage("Load or write a Turing Machine Program and click Run!");
     }
 
     const parseTape = (string) => {
@@ -78,7 +81,7 @@ const Machine = () => {
 
             let curRule = line.trim().split(" ");
             if (curRule.length < 5) {
-                alert("Error: All of your directives must have 5 rules in them");
+                setMessage("Error: All of your directives must have 5 rules in them");
                 // console.log(curRule)
                 return []
             }
@@ -109,29 +112,32 @@ const Machine = () => {
 
             let tmInput = parseTape(tape);
 
-
+            // TODO: It doesn't draw the :) or :( to accept/reject. It just alerts
+            // 
             if (currentState.includes('halt')){
                 if (currentState.includes('accept')){
-                    alert('Machine halted: Accepted.');
+                    setMessage('Machine halted: Accepted.');
                     setRunButton(false); // Halt the machine
                     return;
 
                 }
                 else if (currentState.includes('reject')){
-                    alert('Machine halted: Rejected.');
+                    setMessage('Machine halted: Rejected.');
                     setRunButton(false); // Halt the machine
                     return;
                     
                 }
-            }
-
-            // TODO: I think adding a check for empty tape here works as the check for initial tape being empty because it comes after the halt checks.
-            if (tmInput == ["_"] || tmInput == [" "] || tmInput == [""]) {
-                alert('Tape input empty.');
-                setRunButton(false); // Halt the machine
+                setMessage("Machine halted.");
                 return;
             }
-            
+
+            //  I think adding a check for empty tape here works as the check for initial tape being empty because it comes after the halt checks.
+            // if (tmInput === ["_"] || tmInput == [" "] || tmInput === [""]) {
+            //     alert('Tape input empty.');
+            //     setRunButton(false); // Halt the machine
+            //     return;
+            // }
+
             setNumSteps(numSteps+1);
 
 
@@ -164,20 +170,35 @@ const Machine = () => {
 
 
             if (matchedRule) {
-                if (currentChar !== '_') {
-                    if (matchedRule.writeSymbol === "_" && matchedRule.writeSymbol !== '*') {
-                        tmInput[headIdx] = " "
-                    } else {
-                        tmInput[headIdx] = (matchedRule.writeSymbol === '*') ? currentChar : matchedRule.writeSymbol;
-                    }
+
+                if (matchedRule.writeSymbol === "_"){
+                    tmInput[headIdx] = " ";
                 }
                 else {
-                    tmInput[headIdx] = " "        
+                    if (matchedRule.writeSymbol === '*'){
+                        ; // do nothing on write symbol wildcard
+                    }
+                    else{
+                        tmInput[headIdx] = matchedRule.writeSymbol;
+                    }
                 }
+
                 
                 let newHeadIdx = headIdx;
                 if (matchedRule.moveDirection === 'r') newHeadIdx += 1;
                 else if (matchedRule.moveDirection === 'l') newHeadIdx -= 1;
+
+
+                // TODO: NEED TO DO SOMETHING ABOUT HEAD IDX BEING -1, when it is prepend the tape with a blank space
+                if (newHeadIdx < 0){
+                    // prepend
+                    tmInput.unshift(" ");
+                    newHeadIdx = 0;
+                }
+                else if (newHeadIdx > tmInput.length){
+                    // append
+                    tmInput.push(" ");
+                }
             
 
                 const newState = matchedRule.nextState === '*' ? currentState : matchedRule.nextState;
@@ -187,7 +208,8 @@ const Machine = () => {
                 setCurrentState(newState);
             } else {
                 setRunButton(false); // Halt the machine
-                alert('Machine halted: No matching rule found for current state and character. Input not in language');
+                setMessage('Machine halted: No matching rule found for current state and character. Input not in language');
+                return;
             }
         };
 
@@ -224,7 +246,7 @@ const Machine = () => {
             
             {/* CURRENT STATE & STEPS */}
             <div id="MachineMiddleSection">
-                <Message/> 
+                <Message message={message}/> 
                 <State state={currentState}/>
                 <Steps steps={numSteps}/>
             </div>
