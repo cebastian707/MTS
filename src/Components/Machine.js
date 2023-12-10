@@ -112,7 +112,6 @@ const Machine = () => {
 
             let tmInput = parseTape(tape);
 
-            // TODO: It doesn't draw the :) or :( to accept/reject. It just alerts
             // 
             if (currentState.includes('halt')){
                 if (currentState.includes('accept')){
