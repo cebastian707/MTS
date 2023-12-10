@@ -1,10 +1,10 @@
 import React from "react";
 
 
-const Message = () =>{
+const Message = ({message}) =>{
     return(            
             <div id="MachineStatusMsgWrapper" aria-live="polite">
-                <pre id="MachineStatusMsgText">Load or write a Turing Machine Program and click Run!</pre>
+                <pre id="MachineStatusMsgText">{message}</pre>
                     <div id="MachineStatusMsgText"></div>
             </div>
     );
