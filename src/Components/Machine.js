@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Message from "./Message";
 import State from "./State";
 import Steps from "./Steps";
-import Button from '@mui/material/Button';
+
 
 const Machine = () => {
   
@@ -19,7 +19,15 @@ const Machine = () => {
     const [currentState, setCurrentState] = useState('0');
     const [rules, setRules] = useState([]);
 
-    const [inputTape, setInputTape] = useState("")
+    const [inputTape, setInputTape] = useState("");
+
+    const [fullspeed,runfullspeed] = useState([100]);
+    const [fullspeedmessage,setfsmessage] = useState("Run Full Speed")
+
+    const handlefullspeed =()=>{
+        setfsmessage("Running at Full Speed");
+        runfullspeed(1);
+    };
 
     const handleRunClick = () => {
         setRunButton(true);
@@ -47,6 +55,8 @@ const Machine = () => {
         setNumSteps(0);
         setTape(inputTape);
         setMessage("Load or write a Turing Machine Program and click Run!");
+        runfullspeed(100);
+        setfsmessage("Run at full speed");
     }
 
     const parseTape = (string) => {
@@ -109,7 +119,7 @@ const Machine = () => {
 
         const step = () => {
             
-
+            setMessage("Running Turing Machine (;");
             let tmInput = parseTape(tape);
 
             // TODO: It doesn't draw the :) or :( to accept/reject. It just alerts
@@ -213,7 +223,7 @@ const Machine = () => {
             }
         };
 
-        const timer = setTimeout(step, 100); // Schedule the next step
+        const timer = setTimeout(step,fullspeed); // Schedule the next step
         return () => clearTimeout(timer); // Cleanup on unmount or if dependencies change
 
     }, [runButton, currentState, tape, headIdx, rules]);
@@ -283,10 +293,19 @@ const Machine = () => {
                                     <button id="StopButton" title="Save turing machine program" onClick={handleStopClick}>Stop</button>
 
                                     <br/>
+                                    
                                     <button id="ResetButton" title="Save turing machine program" onClick={handleResetClick}>Reset</button>  
+                                    
                                     <br/>
+
                                     {/*repurposed this to parse the program*/}
                                     <button id="FakeStopButton" title="Save turing machine program" onClick={loadProgram}>Save Program</button>
+
+                                    <br/>
+
+                                    <button id='StopButton' title='Run at full speed' onClick={handlefullspeed}>{fullspeedmessage}</button>
+                                    
+                                    <br/>
                             </div>
                     </div>
                 </div>
