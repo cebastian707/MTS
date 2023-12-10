@@ -4,23 +4,20 @@
 	padding: 0;
 	margin: 0;
 	padding-left: 86px;
-/*	border: 1px solid black;*/
 	position: relative;
 	text-align: left;
 	overflow: hidden;
 	font-size: 15px;
 	font-family: monospace;
-/*	width: 100%;*/
 }
 
 #Source {
-	background-color: transparent;
+	background-color: #eeeeee;
 	display: inline;
 	width: 800px;
 	min-width: 600px;
 	height: 400px;
 	min-height: 250px;
-/*	margin-left: 46px; */
 	font-family: monospace;
 	font-size: 15px;
 	line-height: 17px;
@@ -30,7 +27,6 @@
 
 
 #SourceBackground {
-/*	border: 1px solid red;*/
 	position: absolute;
 	left: 40px;
 	top: 2px;

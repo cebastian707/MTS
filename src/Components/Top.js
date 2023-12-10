@@ -11,7 +11,7 @@ const Top = () =>{
                     <ol>
                         
                         <li>
-                            <a href="#LoadMenu">Load one of the example programs</a>, or write your own in the Turing machine program area.  See <a href="#SyntaxInfo">below for syntax</a>.
+                            Run a program copy input program into text box.Then click save program after that hit reset. Then finally click the run button
                         </li>
                         
                         <li>
@@ -20,8 +20,7 @@ const Top = () =>{
                         
                         <li>
                             Click on 'Run' to start the Turing machine and run it until it halts (if ever).
-                            Click on 'Pause' to interrupt the Turing machine while it is running.
-                            Alternately, click 'Step' to run a single step of the Turing machine.
+                            Click on 'Stop' to interrupt the Turing machine while it is running.
                         </li>
                         
                         <li>

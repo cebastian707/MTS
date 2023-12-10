@@ -7,10 +7,10 @@ body {
 }
 
 #Machine {
-  border: 2px solid #ff6666;
+  border: 2px solid black;
 /*  background-color: #dfdfda; */
 /*  background-color: #ffe1e1; */
-  background-color: #ffefda;
+  background-color: #02020218;
   padding-top: 0.5em;
   padding-bottom: 0.25em;
   padding-left: 0.5em;
@@ -203,7 +203,7 @@ body {
 #MachineLowerSection {
   position: relative;
   display: table;
-  width: 1375.43px; /* Set the width to 1375.43 pixels */
+  width: 137px; /* Set the width to 1375.43 pixels */
   height: 437px;    /* Set the height to 437 pixels */
 }
 
@@ -241,7 +241,7 @@ body {
 #MachineButtonsBlock {
   min-width: 275px;
   max-width: 300px;
-  height: 87%;
+  height: 17%;
   text-align: left;
   margin-left: 10px;
   border: 1px solid grey;

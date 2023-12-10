@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Message from "./Message";
 import State from "./State";
 import Steps from "./Steps";
+import Button from '@mui/material/Button';
 
 const Machine = () => {
   
@@ -125,7 +126,7 @@ const Machine = () => {
             }
 
             // TODO: I think adding a check for empty tape here works as the check for initial tape being empty because it comes after the halt checks.
-            if (tmInput === ["_"] || tmInput == [" "] || tmInput === [""]) {
+            if (tmInput == ["_"] || tmInput == [" "] || tmInput == [""]) {
                 alert('Tape input empty.');
                 setRunButton(false); // Halt the machine
                 return;
@@ -157,8 +158,8 @@ const Machine = () => {
             matchedRule = matchedRule || wildcardMatch;
 
 
-            console.log(currentState, currentChar);
-            console.log(matchedRule);
+            console.log('Current State',currentState, currentChar);
+            console.log('Rule MATCHED',matchedRule);
 
 
 
@@ -256,22 +257,14 @@ const Machine = () => {
                         <div className="BoxTitle">Controls</div>
                             <div id="MachineButtonsBlock">
                                 <button id="RunButton" onClick={handleRunClick} title="Start the machine running">Run</button>
-
-                    
-                                    {/*repurposed this to parse the program*/}
-                                    <button id="FakeStopButton" title="Save turing machine program" onClick={loadProgram}>Save Program</button>
-                                    
+                                    <br/>                                    
                                     <button id="StopButton" title="Save turing machine program" onClick={handleStopClick}>Stop</button>
 
-                                    <button id="ResetButton" title="Save turing machine program" onClick={handleResetClick}>Reset</button>
-                                    
-                                    {/*Needs on click button for undo button*/}
-                                    
-                                    
-                                    {/*Need Step Button and go from there */}
-                                    <br></br>
-                                    <button id="StepButton" disabled title="Run the machine for a sing step and then pause">Step</button>
-                                    <br></br>    
+                                    <br/>
+                                    <button id="ResetButton" title="Save turing machine program" onClick={handleResetClick}>Reset</button>  
+                                    <br/>
+                                    {/*repurposed this to parse the program*/}
+                                    <button id="FakeStopButton" title="Save turing machine program" onClick={loadProgram}>Save Program</button>
                             </div>
                     </div>
                 </div>
