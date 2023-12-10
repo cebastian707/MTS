@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.highlighted {
+  background-color: yellow; /* or any other style to highlight */
+}
