@@ -94,6 +94,7 @@ const Machine = () => {
         setInputTape(event.target.value);
     };
 
+    // read text file
     const handleChange = (event) => {
         fetch(program_array[event.target.value])
         .then(response => {
@@ -103,7 +104,10 @@ const Machine = () => {
             return response.text();
         })
         .then(data => {
+
             setProgram(data); 
+            // console.log(data);
+            // console.log(data.split('\n'));
         })
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
@@ -119,14 +123,17 @@ const Machine = () => {
 
     const parseProgram = (program) => {
         let rules = []
-        const lines = program.split('\n');
+        const lines = program.split('\n').map(str => str.replace(/\r/g, ''));
+        console.log(lines);
         for (let line of lines) {
+
             if (line.startsWith(';')) {
                 continue;
             }
             if (line === '' || line === ' '){
                 continue
             }
+            
 
             let curRule = line.trim().split(" ");
             if (curRule.length < 5) {
