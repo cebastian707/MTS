@@ -2,14 +2,31 @@ import React, { useState, useEffect } from 'react';
 import Message from "./Message";
 import State from "./State";
 import Steps from "./Steps";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import palindrome from '../machines/palindrome.txt';
+import bin_to_dec from '../machines/bin2dec.txt';
+import binaryadd from '../machines/binaryadd.txt';
+import binarymult from '../machines/binarymult.txt';
+import primetest from '../machines/primetest.txt';
+import rpb from '../machines/reversepolishboolean.txt';
+import universal from '../machines/universal.txt';
+import parenthesis from '../machines/parentheses.txt';
+import turingsequence from '../machines/turingsequence.txt';
+import four_state_beaver from '../machines/4statebeaver.txt';
+
+const program_array = [palindrome,binaryadd,binarymult,bin_to_dec,turingsequence,parenthesis,rpb,primetest,four_state_beaver,universal];
+const initial_input = ['1001001','110110 101011','1101 11010','10110',' ','12(2+(3^(4-1)))','10~1&|0|','101',' ','[ L+,0R.,1R.!1L+,1L+,0L.:,0L.,1L.:]1011'];
+const Load_Message = ['Loaded Palindrome','Loaded Binary Addition','Loaded BintoDec','Loaded Turing Sequence','Loaded parentheses','Loaded RPB','Loaded Prime Test','Loaded 4statebeaver','Loaded Universal Turing Machine'];
 
 
 const Machine = () => {
-  
     const [headIdx, setHeadIdx] = useState(0)
     const [runStatus, setRunStatus] = useState(true);
     const [numSteps, setNumSteps] = useState(0);
-
+    const [selectedProgram, setSelectedProgram] = useState('');
     const [tape, setTape] = useState("");
     const [runButton, setRunButton] = useState(false);
     const [program, setProgram] = useState("; Load a program from the menu or write your own!")
@@ -22,7 +39,21 @@ const Machine = () => {
     const [inputTape, setInputTape] = useState("");
 
     const [fullspeed,runfullspeed] = useState([100]);
-    const [fullspeedmessage,setfsmessage] = useState("Run Full Speed")
+    const [fullspeedmessage,setfsmessage] = useState("Run Full Speed");
+
+
+    const handleChange = (event) => {
+        console.log(event.target.value);
+        setSelectedProgram(event.target.value);
+
+        fetch(program_array[event.target.value]).then(r => r.text()).then(text =>{
+            console.log('text decoded',text);
+            setProgram(text);
+            setInputTape(initial_input[event.target.value]);
+            setMessage(Load_Message[event.target.value]);
+            setTape(initial_input[event.target.value]);
+        });
+    };
 
     const handlefullspeed =()=>{
         setfsmessage("Running at Full Speed");
@@ -305,6 +336,28 @@ const Machine = () => {
                                     <button id='StopButton' title='Run at full speed' onClick={handlefullspeed}>{fullspeedmessage}</button>
                                     
                                     <br/>
+                                    <br/>
+                                    {/*Load Example Program*/}
+                                    <FormControl id='stopButton' sx={{ m: 1, minWidth: 150 }}>
+                                        <InputLabel>Load Program</InputLabel>
+                                                <Select
+                                                    labelId="demo-simple-select-label"
+                                                    id="StopButton"
+                                                    value={selectedProgram}
+                                                    label="Load"
+                                                    onChange={handleChange}>
+                                                        <MenuItem value={0}>Palindrome detector</MenuItem>
+                                                        <MenuItem value={1}>Binary addition</MenuItem>
+                                                        <MenuItem value={2}>Binary multiplication</MenuItem>
+                                                        <MenuItem value={3}>Binary to deimal conversion</MenuItem>
+                                                        <MenuItem value={4}>Turing's sequence machine</MenuItem>
+                                                        <MenuItem value={5}>Parentheses checker</MenuItem>
+                                                        <MenuItem value={6}>Reverse Polish Boolean calculator</MenuItem>
+                                                        <MenuItem value={7}>Primality test</MenuItem>
+                                                        <MenuItem value={8}>4-state busy beaver</MenuItem>
+                                                        <MenuItem value={9}>Universal Turing Machine</MenuItem>
+                                                </Select>
+                                    </FormControl>
                             </div>
                     </div>
                 </div>
