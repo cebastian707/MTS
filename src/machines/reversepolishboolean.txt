@@ -81,4 +81,3 @@
 147 * * r 147
 
 ; Exercise: extend this to support other binary operators, eg XOR, NAND
-; Load a suitable initial tape: $INITIAL_TAPE: 10~1&|0|

@@ -34,4 +34,3 @@
 
 
 
-; This is a hack to load an appropriate initial tape. $INITIAL_TAPE: 110110 101011

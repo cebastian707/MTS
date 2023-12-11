@@ -19,7 +19,7 @@ import four_state_beaver from '../machines/4statebeaver.txt';
 
 const program_array = [palindrome,binaryadd,binarymult,bin_to_dec,turingsequence,parenthesis,rpb,primetest,four_state_beaver,universal];
 const initial_input = ['1001001','110110 101011','1101 11010','10110',' ','12(2+(3^(4-1)))','10~1&|0|','101',' ','[ L+,0R.,1R.!1L+,1L+,0L.:,0L.,1L.:]1011'];
-const Load_Message = ['Loaded Palindrome','Loaded Binary Addition','Loaded BintoDec','Loaded Turing Sequence','Loaded parentheses','Loaded RPB','Loaded Prime Test','Loaded 4statebeaver','Loaded Universal Turing Machine'];
+const Load_Message = ['Loaded Palindrome','Loaded Binary Addition','Loaded Binary Mult','Loaded BintoDec','Loaded Turing Sequence','Loaded parentheses','Loaded RPB','Loaded Prime Test','Loaded 4statebeaver','Loaded Universal Turing Machine'];
 
 
 const Machine = () => {
@@ -46,6 +46,10 @@ const Machine = () => {
         setSelectedProgram(event.target.value);
         fetch(program_array[event.target.value]).then(r => r.text()).then(text =>{
             console.log('Program',text);
+            setProgram(text);
+            setTape(initial_input[event.target.value]);
+            setInputTape(initial_input[event.target.value])
+            setMessage(Load_Message[event.target.value]);
         });
 
     };
@@ -62,7 +66,7 @@ const Machine = () => {
     const loadProgram = () => {
         const parsedRules = parseProgram(program);
         setRules(parsedRules);
-        // console.log(parsedRules)
+        console.log('Parse Rules',parsedRules)
         setMessage("Program Loaded")
     }
 
@@ -103,7 +107,8 @@ const Machine = () => {
 
     const parseProgram = (program) => {
         let rules = []
-        const lines = program.split('\n');
+        //const lines = program.split('\n');
+        const lines = program.split('\n').map(str => str.replace(/\r/g, ''));
         for (let line of lines) {
             if (line.startsWith(';')) {
                 continue;

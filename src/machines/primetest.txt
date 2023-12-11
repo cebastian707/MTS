@@ -224,4 +224,3 @@
 616 * . * halt
 
 
-; $INITIAL_TAPE: 101

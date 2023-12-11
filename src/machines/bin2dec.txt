@@ -35,4 +35,3 @@
 21a _ _ r halt
 
 
-; Load an appropriate initial tape. $INITIAL_TAPE: 10110

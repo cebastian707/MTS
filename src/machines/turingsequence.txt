@@ -42,4 +42,3 @@ f0 * * r f2
 f2 * * r f0
 
 
-; Run with a blank initial tape: $INITIAL_TAPE: 
