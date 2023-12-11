@@ -41,6 +41,15 @@ const Machine = () => {
     const [fullspeed,runFullspeed] = useState([100]);
     const [fullSpeedMessage,setSpeedMessage] = useState("Run Full Speed")
 
+
+    const handleLoadProgram = (event) =>{
+        setSelectedProgram(event.target.value);
+        fetch(program_array[event.target.value]).then(r => r.text()).then(text =>{
+            console.log('Program',text);
+        });
+
+    };
+
     const handleFullspeed =()=>{
         setSpeedMessage("Running at Full Speed");
         runFullspeed(1);
@@ -320,7 +329,7 @@ const Machine = () => {
                                                     id="StopButton"
                                                     value={selectedProgram}
                                                     label="Load"
-                                                    onChange={handleChange}>
+                                                    onChange={handleLoadProgram}>
                                                         <MenuItem value={0}>Palindrome detector</MenuItem>
                                                         <MenuItem value={1}>Binary addition</MenuItem>
                                                         <MenuItem value={2}>Binary multiplication</MenuItem>
