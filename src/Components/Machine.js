@@ -38,47 +38,30 @@ const Machine = () => {
 
     const [inputTape, setInputTape] = useState("");
 
-    const [fullspeed,runfullspeed] = useState([100]);
-    const [fullspeedmessage,setfsmessage] = useState("Run Full Speed");
+    const [fullspeed,runFullspeed] = useState([100]);
+    const [fullSpeedMessage,setSpeedMessage] = useState("Run Full Speed")
 
-
-    const handleChange = (event) => {
-        console.log(event.target.value);
-        setSelectedProgram(event.target.value);
-
-        fetch(program_array[event.target.value]).then(r => r.text()).then(text =>{
-            console.log('text decoded',text);
-            setProgram(text);
-            setInputTape(initial_input[event.target.value]);
-            setMessage(Load_Message[event.target.value]);
-            setTape(initial_input[event.target.value]);
-        });
-    };
-
-    const handlefullspeed =()=>{
-        setfsmessage("Running at Full Speed");
-        runfullspeed(1);
+    const handleFullspeed =()=>{
+        setSpeedMessage("Running at Full Speed");
+        runFullspeed(1);
     };
 
     const handleRunClick = () => {
         setRunButton(true);
-        // stepMachine();
-        // Additional logic for running the program can be added here
     };
 
     const loadProgram = () => {
         const parsedRules = parseProgram(program);
         setRules(parsedRules);
-        console.log(parsedRules)
+        // console.log(parsedRules)
+        setMessage("Program Loaded")
     }
 
     const handleStopClick = () => {
         setRunButton(false);
-        // Additional logic for stopping the program can be added here
     };
 
 
-    // make reset function here
     const handleResetClick = () => {
         setRunButton(false);
         setHeadIdx(0);
@@ -86,8 +69,8 @@ const Machine = () => {
         setNumSteps(0);
         setTape(inputTape);
         setMessage("Load or write a Turing Machine Program and click Run!");
-        runfullspeed(100);
-        setfsmessage("Run at full speed");
+        runFullspeed(100);
+        setSpeedMessage("Run at full speed");
     }
 
     const parseTape = (string) => {
@@ -171,17 +154,11 @@ const Machine = () => {
                 return;
             }
 
-            //  I think adding a check for empty tape here works as the check for initial tape being empty because it comes after the halt checks.
-            // if (tmInput === ["_"] || tmInput == [" "] || tmInput === [""]) {
-            //     alert('Tape input empty.');
-            //     setRunButton(false); // Halt the machine
-            //     return;
-            // }
 
             setNumSteps(numSteps+1);
 
 
-
+            // if read symbol is blank space make it a _ for the rule check
             const currentChar = (tmInput[headIdx] === ' ' || tmInput[headIdx] === '') ? '_' : (tmInput[headIdx] || '_');
 
 
@@ -204,8 +181,8 @@ const Machine = () => {
             matchedRule = matchedRule || wildcardMatch;
 
 
-            console.log('Current State',currentState, currentChar);
-            console.log('Rule MATCHED',matchedRule);
+            // console.log('Current State',currentState, currentChar);
+            // console.log('Rule MATCHED',matchedRule);
 
 
 
@@ -229,7 +206,7 @@ const Machine = () => {
                 else if (matchedRule.moveDirection === 'l') newHeadIdx -= 1;
 
 
-                // TODO: NEED TO DO SOMETHING ABOUT HEAD IDX BEING -1, when it is prepend the tape with a blank space
+
                 if (newHeadIdx < 0){
                     // prepend
                     tmInput.unshift(" ");
@@ -253,8 +230,8 @@ const Machine = () => {
             }
         };
 
-        const timer = setTimeout(step,fullspeed); // Schedule the next step
-        return () => clearTimeout(timer); // Cleanup on unmount or if dependencies change
+        const timer = setTimeout(step,fullspeed); // step based on speed
+        return () => clearTimeout(timer); // clear timeout
 
     }, [runButton, currentState, tape, headIdx, rules]);
 
@@ -275,7 +252,6 @@ const Machine = () => {
                             <span 
                                 key={idx}
                                 className={idx === headIdx ? "highlighted" : ""}
-                                // id={idx === headIdx ? "MachineHead" : ""}
                             >
                                 {char}
                             </span>
@@ -320,20 +296,19 @@ const Machine = () => {
                             <div id="MachineButtonsBlock">
                                 <button id="RunButton" onClick={handleRunClick} title="Start the machine running">Run</button>
                                     <br/>                                    
-                                    <button id="StopButton" title="Save turing machine program" onClick={handleStopClick}>Stop</button>
+                                    <button id="StopButton" title="Stop turing machine program" onClick={handleStopClick}>Stop</button>
 
                                     <br/>
                                     
-                                    <button id="ResetButton" title="Save turing machine program" onClick={handleResetClick}>Reset</button>  
+                                    <button id="ResetButton" title="Reset turing machine program" onClick={handleResetClick}>Reset</button>  
                                     
                                     <br/>
 
-                                    {/*repurposed this to parse the program*/}
-                                    <button id="FakeStopButton" title="Save turing machine program" onClick={loadProgram}>Save Program</button>
+                                    <button id="FakeStopButton" title="Load turing machine program" onClick={loadProgram}>Load Program</button>
 
                                     <br/>
 
-                                    <button id='StopButton' title='Run at full speed' onClick={handlefullspeed}>{fullspeedmessage}</button>
+                                    <button id='StopButton' title='Run at full speed' onClick={handleFullspeed}>{fullSpeedMessage}</button>
                                     
                                     <br/>
                                     <br/>

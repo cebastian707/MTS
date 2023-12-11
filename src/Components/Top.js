@@ -11,7 +11,7 @@ const Top = () =>{
                     <ol>
                         
                         <li>
-                            First write a program following the syntax at the bottom into turing machine program area. Then click save program.
+                            First write a program following the syntax at the bottom into turing machine program area. Then click load program.
                         </li>
                         
                         <li>

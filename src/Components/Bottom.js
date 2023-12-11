@@ -21,8 +21,8 @@ const Bottom = () =>{
         <ul>
          <li>'<code>*</code>' can be used as a wildcard in <code>&lt;current symbol&gt;</code> or <code>&lt;current state&gt;</code> to match any character or state.</li>
          <li>'<code>*</code>' can be used in <code>&lt;new symbol&gt;</code> or <code>&lt;new state&gt;</code> to mean 'no change'.</li>
-         <li>'<code>!</code>' can be used at the end of a line to set a breakpoint, eg '<code>1 a b r 2 !</code>'. The machine will automatically pause after executing this line.</li>
-         <li>You can specify the starting position for the head using '<code>*</code>' in the initial input.</li>
+         {/* <li>'<code>!</code>' can be used at the end of a line to set a breakpoint, eg '<code>1 a b r 2 !</code>'. The machine will automatically pause after executing this line.</li> */}
+         {/* <li>You can specify the starting position for the head using '<code>*</code>' in the initial input.</li> */}
         </ul>
        </div>
     );
