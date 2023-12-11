@@ -85,6 +85,22 @@ const Machine = () => {
         setInputTape(event.target.value);
     };
 
+    const handleChange = (event) => {
+        fetch(program_array[event.target.value])
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            setProgram(data); 
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+    }
+
 
     // this should prob only grab the value from text area when we hit the run button, not everytime something is typed into the textarea. but it works
     const handleProgramChange = (event) => {
