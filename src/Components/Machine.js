@@ -98,6 +98,26 @@ const Machine = () => {
         setInputTape(event.target.value);
     };
 
+    // read text file
+    const handleChange = (event) => {
+        fetch(program_array[event.target.value])
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+
+            setProgram(data); 
+            // console.log(data);
+            // console.log(data.split('\n'));
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+    }
+
 
     // this should prob only grab the value from text area when we hit the run button, not everytime something is typed into the textarea. but it works
     const handleProgramChange = (event) => {
@@ -110,12 +130,14 @@ const Machine = () => {
         //const lines = program.split('\n');
         const lines = program.split('\n').map(str => str.replace(/\r/g, ''));
         for (let line of lines) {
+
             if (line.startsWith(';')) {
                 continue;
             }
             if (line === '' || line === ' '){
                 continue
             }
+            
 
             let curRule = line.trim().split(" ");
             if (curRule.length < 5) {
