@@ -350,7 +350,7 @@ const Machine = () => {
                                     <br/>
                                     {/*Load Example Program*/}
                                     <FormControl id='stopButton' sx={{ m: 1, minWidth: 150 }}>
-                                        <InputLabel>Load Program</InputLabel>
+                                        <InputLabel>Example Program</InputLabel>
                                                 <Select
                                                     labelId="demo-simple-select-label"
                                                     id="StopButton"
